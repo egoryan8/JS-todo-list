@@ -3,11 +3,19 @@ const todoInputElement = document.querySelector('.todos__input');
 const todoSubmitButton = document.querySelector('.todos__submit-btn');
 const todoList = document.querySelector('.todos__list');
 
+const deleteTodo = (evt) => {
+  const todo = evt.currentTarget.closest('.todo');
+  todo.style.transform = 'translateX(-200%)';
+  todo.style.opacity = '0';
+  todo.addEventListener('transitionend', () => todo.remove());
+};
+
 const createTodo = (text) => {
   const todoTemplateElement = document.querySelector('.todo-template').content;
   const todo = todoTemplateElement.querySelector('.todo').cloneNode(true);
 
   todo.querySelector('.todo__text').textContent = text;
+  todo.querySelector('.todo__btn_type_delete').addEventListener('click', (evt) => deleteTodo(evt));
 
   return todo;
 };
