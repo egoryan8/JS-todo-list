@@ -15,7 +15,7 @@ const createTodo = (text) => {
   const todo = todoTemplateElement.querySelector('.todo').cloneNode(true);
 
   todo.querySelector('.todo__text').textContent = text;
-  todo.querySelector('.todo__btn_type_delete').addEventListener('click', (evt) => deleteTodo(evt));
+  todo.querySelector('.todo__btn_type_delete').addEventListener('click', deleteTodo);
 
   return todo;
 };
