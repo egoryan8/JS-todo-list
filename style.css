@@ -74,6 +74,10 @@ body {
   }
 }
 
+.todos__input_type_error {
+  border: 2px solid red;
+}
+
 .todos__submit-btn {
   padding: 20px 20px;
   background: rgb(7, 119, 246);
@@ -86,6 +90,13 @@ body {
   flex-shrink: 0;
   margin-left: 10px;
   cursor: pointer;
+}
+
+.todos__submit-btn_disabled {
+  background: transparent;
+  cursor: not-allowed;
+  color: rgba(254, 254, 254, 0.4);
+  border: 1px solid gray;
 }
 
 @media (max-width: 605px) {
@@ -148,6 +159,29 @@ body {
   }
 }
 
+.todos__set {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.todoes__error {
+  font-size: 13px;
+  margin-top: 5px;
+  color: red;
+  visibility: hidden;
+}
+
+.todoes__error_visible {
+  visibility: visible;
+}
+
+@media (max-width: 767px) {
+  .todoes__error {
+    font-size: 10px;
+  }
+}
+
 .todo__btn {
   width: 23px;
   height: 23px;
@@ -188,6 +222,7 @@ body {
   opacity: 1;
   transition: opacity 0.15s ease-in-out;
   outline: 0;
+  height: fit-content;
 }
 
 .button:hover {

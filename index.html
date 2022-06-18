@@ -20,16 +20,22 @@
         <h1 class="header__title">Todo <span>List</span></h1>
       </header>
       <section class="todos">
-        <form name="todo-form" class="todos__form">
-          <input
-            type="text"
-            name="todo"
-            class="todos__input"
-            placeholder="Следующее дело..."
-            minlength="2"
-            maxlength="25"
-          />
-          <button class="todos__submit-btn button">Добавить</button>
+        <form name="todo-form" class="todos__form" novalidate>
+          <label class="todos__set">
+            <input
+              type="text"
+              id="todo-input"
+              name="todo"
+              class="todos__input"
+              placeholder="Следующее дело..."
+              minlength="3"
+              maxlength="25"
+            />
+            <span class="todoes__error todo-input-error">qwfqfqfq</span>
+          </label>
+          <button class="todos__submit-btn button todos__submit-btn_disabled" disabled>
+            Добавить
+          </button>
         </form>
         <ul class="todos__list"></ul>
       </section>
@@ -96,6 +102,8 @@
         </button>
       </li>
     </template>
-    <script src="./index.js"></script>
+    <script src="./scripts/todoes.js"></script>
+    <script src="./scripts/index.js"></script>
+    <script src="./scripts/validate.js"></script>
   </body>
 </html>

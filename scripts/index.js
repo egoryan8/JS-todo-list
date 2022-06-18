@@ -2,6 +2,7 @@ const todoFormElement = document.querySelector('.todos__form');
 const todoInputElement = document.querySelector('.todos__input');
 const todoSubmitButton = document.querySelector('.todos__submit-btn');
 const todoList = document.querySelector('.todos__list');
+const errorElement = todoFormElement.querySelector(`.${todoInputElement.id}-error`);
 
 let editedTodo = null;
 
@@ -22,6 +23,7 @@ const editTodo = (evt) => {
   todoInputElement.value = todo.querySelector('.todo__text').textContent;
   todoInputElement.style.boxShadow = '0px 0px 50px rgb(7, 119, 246)';
   todoSubmitButton.textContent = 'Сохранить';
+  setEnableBtn();
 };
 
 const addTodoListeners = (todo) => {
@@ -41,7 +43,7 @@ const createTodo = (text) => {
 
 const addTodo = (text) => {
   const todo = createTodo(text);
-  todoList.append(todo);
+  todoList.prepend(todo);
 };
 
 const duplicateTodo = (evt) => {
@@ -59,6 +61,7 @@ const handleTodoSubmit = (evt) => {
   const text = todoInputElement.value;
 
   if (editedTodo) {
+    setDisableBtn();
     editedTodo.querySelector('.todo__text').textContent = text;
     todoSubmitButton.textContent = 'Добавить';
     editedTodo = null;
@@ -69,5 +72,9 @@ const handleTodoSubmit = (evt) => {
 
   todoFormElement.reset();
 };
+
+todoes.forEach((todoEl) => {
+  addTodo(todoEl);
+});
 
 todoFormElement.addEventListener('submit', handleTodoSubmit);
