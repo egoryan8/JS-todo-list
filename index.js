@@ -5,11 +5,6 @@ const todoList = document.querySelector('.todos__list');
 
 let editedTodo = null;
 
-const addTodoListeners = (todo) => {
-  todo.querySelector('.todo__btn_type_delete').addEventListener('click', deleteTodo);
-  todo.querySelector('.todo__btn_type_edit').addEventListener('click', editTodo);
-};
-
 const getTodoByEvent = (evt) => evt.currentTarget.closest('.todo');
 
 const deleteTodo = (evt) => {
@@ -29,6 +24,12 @@ const editTodo = (evt) => {
   todoSubmitButton.textContent = 'Сохранить';
 };
 
+const addTodoListeners = (todo) => {
+  todo.querySelector('.todo__btn_type_delete').addEventListener('click', deleteTodo);
+  todo.querySelector('.todo__btn_type_edit').addEventListener('click', editTodo);
+  todo.querySelector('.todo__btn_type_duplicate').addEventListener('click', duplicateTodo);
+};
+
 const createTodo = (text) => {
   const todoTemplateElement = document.querySelector('.todo-template').content;
   const todo = todoTemplateElement.querySelector('.todo').cloneNode(true);
@@ -41,6 +42,15 @@ const createTodo = (text) => {
 const addTodo = (text) => {
   const todo = createTodo(text);
   todoList.append(todo);
+};
+
+const duplicateTodo = (evt) => {
+  const todo = getTodoByEvent(evt);
+
+  const duplicatedTodo = todo.cloneNode(true);
+
+  todo.after(duplicatedTodo);
+  addTodoListeners(duplicatedTodo);
 };
 
 const handleTodoSubmit = (evt) => {
