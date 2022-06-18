@@ -68,6 +68,7 @@ const handleTodoSubmit = (evt) => {
     todoInputElement.style.boxShadow = 'none';
   } else {
     addTodo(text);
+    setDisableBtn();
   }
 
   todoFormElement.reset();
