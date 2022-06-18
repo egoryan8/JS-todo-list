@@ -5,6 +5,11 @@ const todoList = document.querySelector('.todos__list');
 
 let editedTodo = null;
 
+const addTodoListeners = (todo) => {
+  todo.querySelector('.todo__btn_type_delete').addEventListener('click', deleteTodo);
+  todo.querySelector('.todo__btn_type_edit').addEventListener('click', editTodo);
+};
+
 const getTodoByEvent = (evt) => evt.currentTarget.closest('.todo');
 
 const deleteTodo = (evt) => {
@@ -29,9 +34,7 @@ const createTodo = (text) => {
   const todo = todoTemplateElement.querySelector('.todo').cloneNode(true);
 
   todo.querySelector('.todo__text').textContent = text;
-  todo.querySelector('.todo__btn_type_delete').addEventListener('click', deleteTodo);
-  todo.querySelector('.todo__btn_type_edit').addEventListener('click', editTodo);
-
+  addTodoListeners(todo);
   return todo;
 };
 
