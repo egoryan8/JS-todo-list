@@ -3,11 +3,25 @@ const todoInputElement = document.querySelector('.todos__input');
 const todoSubmitButton = document.querySelector('.todos__submit-btn');
 const todoList = document.querySelector('.todos__list');
 
+let editedTodo = null;
+
+const getTodoByEvent = (evt) => evt.currentTarget.closest('.todo');
+
 const deleteTodo = (evt) => {
-  const todo = evt.currentTarget.closest('.todo');
+  const todo = getTodoByEvent(evt);
   todo.style.transform = 'translateX(-200%)';
   todo.style.opacity = '0';
   todo.addEventListener('transitionend', () => todo.remove());
+};
+
+const editTodo = (evt) => {
+  const todo = getTodoByEvent(evt);
+
+  editedTodo = todo;
+
+  todoInputElement.value = todo.querySelector('.todo__text').textContent;
+  todoInputElement.style.boxShadow = '0px 0px 50px rgb(7, 119, 246)';
+  todoSubmitButton.textContent = 'Сохранить';
 };
 
 const createTodo = (text) => {
@@ -16,6 +30,7 @@ const createTodo = (text) => {
 
   todo.querySelector('.todo__text').textContent = text;
   todo.querySelector('.todo__btn_type_delete').addEventListener('click', deleteTodo);
+  todo.querySelector('.todo__btn_type_edit').addEventListener('click', editTodo);
 
   return todo;
 };
@@ -30,7 +45,14 @@ const handleTodoSubmit = (evt) => {
 
   const text = todoInputElement.value;
 
-  addTodo(text);
+  if (editedTodo) {
+    editedTodo.querySelector('.todo__text').textContent = text;
+    todoSubmitButton.textContent = 'Добавить';
+    editedTodo = null;
+    todoInputElement.style.boxShadow = 'none';
+  } else {
+    addTodo(text);
+  }
 
   todoFormElement.reset();
 };
