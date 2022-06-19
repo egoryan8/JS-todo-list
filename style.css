@@ -224,6 +224,7 @@ body {
   transition: opacity 0.15s ease-in-out;
   outline: 0;
   height: fit-content;
+  width: fit-content;
 }
 
 .button:hover {
